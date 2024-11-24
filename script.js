@@ -8,18 +8,22 @@ btn.addEventListener("click", async () => {
   //   console.log(furl);
   let response = await furl.json();
   console.log(response);
-  drawBox(response);
+  drawBox(response, val);
 });
 
-function drawBox(response) {
+function drawBox(response, value) {
   content = "";
-  response.forEach((val) => {
+  for (let index = 0; index < response.length; index++) {
+    const val = response[index];
     content += `<div class="box">
           <img
             src="${val.src}" alt=""
           />
           <p>${val.name}</p>
         </div>`;
-  });
+    if (index == value - 1) {
+      break; // Now 'break' works properly
+    }
+  }
   container.innerHTML = content;
 }
